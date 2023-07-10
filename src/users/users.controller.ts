@@ -8,7 +8,7 @@ import {
   Delete,
   ParseIntPipe,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -24,16 +24,19 @@ export class UsersController {
   }
 
   @Get()
+  @ApiBearerAuth()
   findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
+  @ApiBearerAuth()
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.findOne(id);
   }
 
   @Patch(':id')
+  @ApiBearerAuth()
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
@@ -42,6 +45,7 @@ export class UsersController {
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.remove(id);
   }

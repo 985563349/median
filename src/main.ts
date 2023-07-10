@@ -1,5 +1,5 @@
-import { HttpAdapterHost, NestFactory, Reflector } from '@nestjs/core';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import { HttpAdapterHost, NestFactory, Reflector } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { PrismaClientExceptionFilter } from './common/filters/prisma-client-exception.filter';
@@ -14,6 +14,7 @@ async function bootstrap() {
     .setTitle('Median')
     .setDescription('The Median API description')
     .setVersion('0.1')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
